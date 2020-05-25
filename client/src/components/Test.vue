@@ -1,5 +1,6 @@
 <template>
     <div>
+        <img alt="AppTec logo" src="../assets/appTecLogo.png" height="50" style="vertical-align:left">
         <img alt="Bitcoin logo" src="../assets/bitcoinLogo.png" height="50" style="vertical-align:middle">
         <br>
         <p>{{ chartMessage }}</p>
