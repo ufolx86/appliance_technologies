@@ -21,7 +21,7 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 def returnDataSeries():
     #bitcoinPrices = np.zeros(4000,2)
     range_begin = datetime.datetime(2020, 1, 1, 19, 39, 36, 815417)
-    range_end = datetime.datetime(2020, 5, 24, 19, 39, 36, 815417)
+    range_end = datetime.datetime(2020, 5, 25, 19, 39, 36, 815417)
     b = BtcConverter()
     #get_previous_price(currency,date begin, date end)
     bitcoinPrices = b.get_previous_price_list('EUR', range_begin, range_end)
