@@ -1,11 +1,26 @@
 <template>
     <div>
-        <img alt="AppTec logo" src="../assets/appTecLogo.png" height="50" style="vertical-align:left">
-        <img alt="Bitcoin logo" src="../assets/bitcoinLogo.png" height="50" style="vertical-align:middle">
+        <img alt="AppTec logo" src="../assets/appTecLogo.png" height="100" style="vertical-align:left">
+        <!-- <img alt="Bitcoin logo" src="../assets/bitcoinLogo.png" height="50" style="vertical-align:middle"> -->
         <br>
         <p>{{ chartMessage }}</p>
-        <highcharts class="stock" :options="stockOptions"></highcharts>
+        <highcharts class="stock" :options="bitcoinOptions"></highcharts>
+        <highcharts class="stock" :options="numpyOptions"></highcharts>
+        <v-card height="150">
+            <v-footer
+                absolute
+                class="font-weight-medium"
+            >
+                <v-col
+                    class="text-center"
+                    cols="12"
+                >
+                    {{ new Date().getFullYear() }} — <strong>Appliance Technologies</strong>
+                </v-col>
+            </v-footer>
+        </v-card>
     </div>
+    
 </template>
 
 <script>
@@ -22,9 +37,40 @@ export default {
             bitcoinPrices:[],
             chartMessage: "This is a chart showing the price of Bitcoin since January 1, 2020.",
             msg: 'Hello!',
-            stockOptions: {
+            msg2:'',
+            numpyOptions: {
                 rangeSelector: {
-                selected: 1
+                    selected: 1
+                },
+                title: {
+                text: 'Numpy Array'
+                },
+                yAxis: {
+                    title: {
+                    text: 'Random Data Y'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 2,
+                    }]
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -10,
+                    y: 100,
+                    borderWidth: 0
+                },
+                //series: results,
+                series: [{
+                    name: 'TEST DATA',
+                    data: []
+                }]
+            },
+            bitcoinOptions: {
+                rangeSelector: {
+                    selected: 1
                 },
                 title: {
                 text: 'Bitcoin Price'
@@ -54,9 +100,6 @@ export default {
                 series: [{
                     name: 'BTC',
                     data: [],
-                    //data: [10, 20, 10, 23, 65, 121, 44, 66, 98, 30, 32, 56, 25, 12, 53],
-                    // pointStart: Date.UTC(2018, 1, 1),
-                    // pointInterval: 1000 * 3600 * 24,
                     tooltip: {
                         valueDecimals: 2
                     }
@@ -66,11 +109,23 @@ export default {
     },
     methods: {
         getDataFromBack() {
-            const path = 'http://localhost:5000/test';
+            const path = 'http://localhost:5000/bitcoinPrices';
             axios.get(path)
                 .then((res) => {
                     this.msg = res.data;
                     this.parseDataToArray();
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        },
+        getDataFromBack2() {
+            const path = 'http://localhost:5000/numpyArray';
+            axios.get(path)
+                .then((res) => {
+                    this.msg2 = res.data;
+                    console.log(this.msg2)
+                    // this.parseDataToArray();
                 })
                 .catch((error) => {
                     console.error(error);
@@ -99,6 +154,7 @@ export default {
     },
     created() {
         this.getDataFromBack();
+        this.getDataFromBack2();
     },
     // mounted: function () {
     //     setTimeout(function(){ 
