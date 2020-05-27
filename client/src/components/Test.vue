@@ -125,7 +125,7 @@ export default {
                 .then((res) => {
                     this.msg2 = res.data;
                     console.log(this.msg2)
-                    // this.parseDataToArray();
+                    this.sendSeriesToData2();
                 })
                 .catch((error) => {
                     console.error(error);
@@ -150,6 +150,10 @@ export default {
         sendSeriesToData() {
             const series = this.$children[0].chart.series[0];
             series.setData(this.bitcoinPrices);
+        },
+        sendSeriesToData2() {
+            const series = this.$children[1].chart.series[0];
+            series.setData(this.msg2);
         }
     },
     created() {
