@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import HighchartsVue from 'highcharts-vue'
 import vuetify from './plugins/vuetify'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.config.productionTip = false;
 
